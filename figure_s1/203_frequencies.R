@@ -2,7 +2,7 @@ library(vcfR)
 library(ggplot2)
 library(tidyr)
 
-vcf_203 <- read.vcfR("/Users/evahenningsen/Documents/Research/MS_projects/203_assembly/illumina_reads/203to12sd80.vcf", verbose = FALSE)
+vcf_203 <- read.vcfR("/Users/evahenningsen/Documents/GitHub/Pca203_assembly/figure_s1/203to12sd80.vcf", verbose = FALSE)
 
 #Substitute non-het positions with NA values
 vcf_203_gt <- extract.gt(vcf_203, element = 'GT')
@@ -68,4 +68,4 @@ alfq_203_plot <- ggplot(vcf_203_t, aes(x = Ab)) +
         axis.title.x = element_text(size = 14, angle = 0),
         axis.title.y = element_text(size = 14, angle = 90))
 
-ggsave(filename = "/Users/evahenningsen/Documents/Research/MS_projects/203_assembly/illumina_reads/203_alfq_plot.tiff", plot = alfq_203_plot, device = "tiff", width = 2, height = 3, units = "in")
+ggsave(filename = "/Users/evahenningsen/Documents/GitHub/Pca203_assembly/figure_s1/203_alfq_plot.tiff", plot = alfq_203_plot, device = "tiff", width = 2, height = 3, units = "in")
