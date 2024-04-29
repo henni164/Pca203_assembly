@@ -2,9 +2,9 @@ library(ggplot2)
 library(dplyr)
 library(ggchicklet)
 
-coord_dat_203 <- read.delim(file = "/Users/evahenningsen/Documents/Research/203_assembly/full_table_buscov3_Oat_crown_rust_203_chrsA.tsv", header = FALSE, sep = "\t")
-coord_dat_pgt <- read.delim(file = "/Users/evahenningsen/Documents/Research/203_assembly/full_table_buscov3_Stem_rust_chrsA.tsv", header = FALSE, sep = "\t")
-coord_dat_lr <- read.delim(file = "/Users/evahenningsen/Documents/Research/203_assembly/full_table_buscov3_Leaf_rust_chrsA.tsv", header = FALSE, sep = "\t")
+coord_dat_203 <- read.delim(file = "full_table_buscov3_Oat_crown_rust_203_chrsA.tsv", header = FALSE, sep = "\t")
+coord_dat_pgt <- read.delim(file = "full_table_buscov3_Stem_rust_chrsA.tsv", header = FALSE, sep = "\t")
+coord_dat_lr <- read.delim(file = "full_table_buscov3_Leaf_rust_chrsA.tsv", header = FALSE, sep = "\t")
 colnames(coord_dat_203) <- c("BUSCOID", "Status", "chr", "start", "end", "s1", "s2")
 colnames(coord_dat_pgt) <- c("BUSCOID", "Status", "chr", "start", "end", "s1", "s2")
 colnames(coord_dat_lr) <- c("BUSCOID", "Status", "chr", "start", "end", "s1", "s2")
@@ -16,7 +16,7 @@ merged_pgt_lr <- merge(coord_dat_pgt, coord_dat_lr, by = "BUSCOID", all = FALSE)
 
 full_dat <- rbind(merged_pgt_203, merged_pgt_lr)
 
-chr_lengths <- read.delim("/Users/evahenningsen/Documents/Research/203_assembly/chr_lengths.txt", header = TRUE, sep = "\t")
+chr_lengths <- read.delim("chr_lengths.txt", header = TRUE, sep = "\t")
 CHRNAMES_203 <- as.vector(unique(chr_lengths$chr))
 CHRNAMES_203 <- CHRNAMES_203[37:54]
 colnames(chr_lengths)[1] <- "chr.x"
@@ -80,7 +80,7 @@ fixed_LR1$num.y <- rep("3", length(fixed_LR1$chr.x))
 really_finished_dat <- rbind(fixed_210, fixed_LR1)
 really_finished_dat$num.y <- as.numeric(really_finished_dat$num.y)
 
-plotting_dat <- read.delim(file = "/Users/evahenningsen/Documents/Research/203_assembly/RNAseq/start_end.txt", header = TRUE, sep = "\t")
+plotting_dat <- read.delim(file = "start_end.txt", header = TRUE, sep = "\t")
 plotting_dat$color <- as.factor(plotting_dat$color)
 
 plotting_dat2 <- plotting_dat[plotting_dat$color != "2",]
@@ -115,4 +115,4 @@ all_plot <- ggplot() +
         legend.position = "none",
         axis.text.x = element_text(margin = margin(0,0,0,0, "cm"), size = 10))
 
-ggsave("/Users/evahenningsen/Documents/Research/203_assembly/whole_synteny_plot_buscos.tiff", plot = all_plot, device = "tiff", width = 3, height = 8, unit = "in")
+ggsave("whole_synteny_plot_buscos.tiff", plot = all_plot, device = "tiff", width = 3, height = 8, unit = "in")
